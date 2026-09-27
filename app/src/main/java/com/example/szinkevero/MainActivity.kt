@@ -32,14 +32,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 @Composable
 fun RGBColorMixer() {
     var red by remember {
@@ -60,12 +52,9 @@ fun RGBColorMixer() {
         Text("Blue: ${blue.toInt()}")
         Slider(value=blue, onValueChange = {newValue-> blue = newValue}, valueRange = 0f..255f)
     }
+    Column {
+        Text("RGB(${red.toInt()},${green.toInt()}),${blue.toInt()}")
+    }
 }
 
 @Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SzinKeveroTheme {
-        Greeting("Android")
-    }
-}
