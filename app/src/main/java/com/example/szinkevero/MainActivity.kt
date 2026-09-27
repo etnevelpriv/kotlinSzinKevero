@@ -20,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +32,14 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+}
+
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
 }
 @Composable
 fun RGBColorMixer() {
@@ -51,10 +60,19 @@ fun RGBColorMixer() {
         Slider(value=green, onValueChange = {newValue-> green = newValue}, valueRange = 0f..255f)
         Text("Blue: ${blue.toInt()}")
         Slider(value=blue, onValueChange = {newValue-> blue = newValue}, valueRange = 0f..255f)
+        Text("RGB(${red.toInt()},${green.toInt()},${blue.toInt()})")
     }
-    Column {
-        Text("RGB(${red.toInt()},${green.toInt()}),${blue.toInt()}")
-    }
+    val color = Color(
+        red = red.toInt(),
+        green = green.toInt(),
+        blue = blue.toInt()
+    )
 }
 
 @Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    SzinKeveroTheme {
+        Greeting("Android")
+    }
+}
