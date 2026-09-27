@@ -27,7 +27,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
+import androidx.compose.ui.graphics.fromColorLong
 import androidx.compose.ui.unit.dp
+import org.w3c.dom.Text
 import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
@@ -76,12 +78,16 @@ fun RGBColorMixer() {
         Slider(value=blue, onValueChange = {newValue-> blue = newValue}, valueRange = 0f..255f)
         Text("RGB(${red.toInt()},${green.toInt()},${blue.toInt()})")
         Text("HEX: ${String.format("#%02X%02X%02X", red.toInt(), green.toInt(), blue.toInt())}") // Ezt sajnos leneztem az internetrol, megyek es megbanom buneimet
-        Box(modifier = Modifier.fillMaxWidth().height(200.dp).background(color))
+        Box(modifier = Modifier.fillMaxWidth().height(200.dp).background(color)) {
+            val colorSum = red.toInt()+blue.toInt()+green.toInt()
+            if (colorSum> (255*3)/2) Text(text = "Ez a szin vilagos", color= Color.Black)
+            else Text(text = "Ez a szin sotet", color= Color.White)
+        }
         Column () {
             Button(onClick = {
-                val randomRed = Random.nextInt(0,255).toFloat()
-                val randomGreen = Random.nextInt(0,255).toFloat()
-                val randomBlue = Random.nextInt(0,255).toFloat()
+                val randomRed = Random.nextInt(0,256).toFloat()
+                val randomGreen = Random.nextInt(0,256).toFloat()
+                val randomBlue = Random.nextInt(0,256).toFloat()
                 red = randomRed
                 green = randomGreen
                 blue= randomBlue
