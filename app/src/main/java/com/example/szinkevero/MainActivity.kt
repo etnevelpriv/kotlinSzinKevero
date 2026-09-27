@@ -1,9 +1,11 @@
 package com.example.szinkevero
 
+import android.R
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -21,7 +23,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
-
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
+import androidx.compose.ui.unit.dp
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +56,12 @@ fun RGBColorMixer() {
     var blue by remember {
         mutableStateOf((0f))
     }
+    val color = Color(
+        red = red.toInt(),
+        green = green.toInt(),
+        blue = blue.toInt()
+    )
+
     Column {
         Text("RGB Szinkevero")
         Text("Red: ${red.toInt()}")
@@ -61,12 +71,8 @@ fun RGBColorMixer() {
         Text("Blue: ${blue.toInt()}")
         Slider(value=blue, onValueChange = {newValue-> blue = newValue}, valueRange = 0f..255f)
         Text("RGB(${red.toInt()},${green.toInt()},${blue.toInt()})")
+        Box(modifier = Modifier.fillMaxSize().height(200.dp).background(color))
     }
-    val color = Color(
-        red = red.toInt(),
-        green = green.toInt(),
-        blue = blue.toInt()
-    )
 }
 
 @Preview(showBackground = true)
