@@ -101,7 +101,6 @@ fun RGBColorMixer() {
         }
     }
 }
-
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
